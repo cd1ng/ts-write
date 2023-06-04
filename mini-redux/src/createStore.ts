@@ -1,3 +1,5 @@
+import { typeOf as kindOf, curry } from '../src/utils'
+
 // createStore提供作为生成唯一store的函数
 // 创建一个包含程序完整state树的Redux store，应用中应有且仅有一个store
 // createStore(reducer,[preloadedState],[enhancer])
@@ -14,8 +16,7 @@ type CreateStoreProps = (
  * @param enhancer -Function Store enhancer
  */
 const createStore: CreateStoreProps = (reducer, preloadedState, enhancer) => {
-
-  if(typeof reducer !== 'function'){
+  if (typeof reducer !== 'function') {
     throw new Error(`Expect the root reducer to be a fucntion,instead of ${kindOf(reducer)}`)
   }
 
@@ -23,16 +24,16 @@ const createStore: CreateStoreProps = (reducer, preloadedState, enhancer) => {
   let currentState = initialState
   const listener: any = []
 
-  if(enhancer){
-    return enhancer(createStore)(reducer,preloadedState)
+  if (enhancer) {
+    return enhancer(createStore)(reducer, preloadedState)
   }
 
   const getState = () => currentState
+
   const dispatch = (action) => {
-    listener.map(item=>{
-      if()
-    })
+    listener.map((item) => {})
   }
+
   const subscribe = (target: any) => {
     !listener.includes(target) && listener.push(target)
   }
